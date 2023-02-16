@@ -7,3 +7,5 @@ npm-debug.log
 **/dist/**
 .idea/**
 dist
+
+__pycache__
