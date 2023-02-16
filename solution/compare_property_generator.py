@@ -1,5 +1,5 @@
-from dummy_data.criteria import recommendation_criteria_dict
-from dto import User, RecCriteriaUserKeyType, RecCriteria, RecCriteriaUserKey, RecCriteriaUserKeySortType, Restaurant, \
+from .dummy_data.criteria import recommendation_criteria_dict
+from .dto import User, RecCriteriaUserKeyType, RecCriteria, RecCriteriaUserKey, RecCriteriaUserKeySortType, Restaurant, \
     RecCriteriaUserKeyAttrType, RecCriteriaUserKeyArrayFilter, RecCriteriaUserKeyOperator, \
     RecCriteriaUserKeyArrayFilterUnitType
 from typing import List

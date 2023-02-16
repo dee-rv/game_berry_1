@@ -3,11 +3,11 @@ from typing import List
 
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-from solution import RecommendationEngine
-from dto import User, Restaurant
+from solution.recommended import RecommendationEngine
+from solution.dto import User, Restaurant
 from pydantic import parse_obj_as
-from dummy_data.ref_user_data import user
-from dummy_data.ref_rest_data import available_restaurants
+from solution.dummy_data.ref_user_data import user
+from solution.dummy_data.ref_rest_data import available_restaurants
 
 
 def print_hi(name):

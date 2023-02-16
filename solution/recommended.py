@@ -1,13 +1,8 @@
 from typing import List
-
-from pydantic import parse_obj_as
-
-from dto import User, Restaurant, RecCriteria, RecCriteriaCondition, RecCriteriaConditionCombinationType, \
+from .dto import User, Restaurant, RecCriteria, RecCriteriaCondition, RecCriteriaConditionCombinationType, \
     RecCriteriaUserKeyOperator, RecCriteriaConditionCriteriaType, RecCriteriaConditionCriteria
-from dummy_data.ref_user_data import user
-from dummy_data.ref_rest_data import available_restaurants
-from dummy_data.criteria import recommendation_criteria_dict
-from compare_property_generator import ComparePropertyGenerator
+from .dummy_data.criteria import recommendation_criteria_dict
+from .compare_property_generator import ComparePropertyGenerator
 
 """
 Order Conditions of Recommendation
