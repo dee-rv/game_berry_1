@@ -49,7 +49,7 @@ class RecCriteriaUserKeyArrayFilter(BaseModel):
 
 class RecCriteriaUserKeyArray(BaseModel):
     start_index: int
-    end_index: int
+    end_index: Optional[int]
     array_key: str
     extract_key: str
     convert_into_integer: Optional[bool]
@@ -67,14 +67,19 @@ class RecCriteriaUserKey(BaseModel):
 class RecCriteriaConditionCriteriaType(str, Enum):
     ATTR_COMPARE = 'ATTR_COMPARE'
     SIMPLE_COMPARE = 'SIMPLE_COMPARE'
+    SPECIAL_FUNCTION = 'SPECIAL_FUNCTION'
 
 
+class RecCriteriaConditionCriteriaExtra(BaseModel):
+    limit: Optional[int]
+    condition_index : Optional[int]
 class RecCriteriaConditionCriteria(BaseModel):
     key: str
     attr_key: Optional[str]
     type: RecCriteriaConditionCriteriaType
     operation: RecCriteriaUserKeyOperator
     value: Optional[Any]
+    extra : Optional[RecCriteriaConditionCriteriaExtra]
 
 
 class RecCriteriaConditionCombinationType(str, Enum):

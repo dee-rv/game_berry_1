@@ -1,7 +1,6 @@
 from typing import List
 from .dto import User, Restaurant, RecCriteria, RecCriteriaCondition, RecCriteriaConditionCombinationType, \
     RecCriteriaUserKeyOperator, RecCriteriaConditionCriteriaType, RecCriteriaConditionCriteria
-from .dummy_data.criteria import recommendation_criteria_dict
 from .compare_property_generator import ComparePropertyGenerator
 
 """
@@ -20,7 +19,7 @@ C9 All restaurants of any cuisine, any cost bracket
 
 
 class RecommendationEngine:
-    def __init__(self):
+    def __init__(self, recommendation_criteria_dict: dict, limit: int, debug: bool):
         """
         ASSUMPTIONS MADE
         1. cannot use database for indexing and optimization
@@ -38,6 +37,12 @@ class RecommendationEngine:
         A userfriendly UI can also be built to set and modify the recommendation JSON
         """
         self.recommendation_criteria = RecCriteria(**recommendation_criteria_dict)
+
+        if limit < 1:
+            raise Exception("limit cannot be less than 1")
+        # no of restaurants to be returns
+        self.limit = limit
+        self.debug = debug
 
         """
         represents the index of the first element in the array satisfying that particular condition,
@@ -138,9 +143,11 @@ class RecommendationEngine:
         :param restaurant:
         :return:
         """
+
         for index in range(len(self.recommendation_criteria.conditions)):
             condition = self.recommendation_criteria.conditions[index]
             is_matching = self._isConditionMatching(restaurant=restaurant, condition=condition)
+
             if is_matching:
                 return index
             if condition.fallback:
@@ -159,9 +166,14 @@ class RecommendationEngine:
             self.condition_index_list[index] += 1
 
     def _sortViaConditions(self, available_restaurants: List[Restaurant]):
+        if self.debug:
+            print(self.properties)
+
         for restaurant in available_restaurants:
             condition_number = self._getMatchingCondition(restaurant=restaurant)
             if condition_number is not None:
+                if self.debug:
+                    print(f"condition_number : {condition_number + 1} ::: restaurantId : {restaurant.restaurantId}")
                 # self.condition_index_list[condition_number]
                 # as improvement, random index int can be generated to not show the same order to the user
                 # index = random.randint(self.condition_index_list[condition_number], self.condition_index_list[condition_number+1] if condition_number < len(self.condition_index_list) -1 else len(self.condition_index_list))
@@ -191,4 +203,4 @@ class RecommendationEngine:
         self._sortViaConditions(
             available_restaurants=available_restaurants
         )
-        return self.recommended_restaurants
+        return self.recommended_restaurants[0:self.limit]

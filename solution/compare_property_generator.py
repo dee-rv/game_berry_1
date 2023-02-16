@@ -68,7 +68,7 @@ class ComparePropertyGenerator:
                                   reverse=sort_order == RecCriteriaUserKeySortType.desc)
             self.sorted_map.update({sorted_key: sorted_array})
 
-        result = [getattr(x, extract_key) for x in sorted_array[start_index:end_index]]
+        result = [getattr(x, extract_key) for x in sorted_array[start_index:end_index if end_index else len(sorted_array)]]
         if criteria.array.convert_into_integer:
             result = [int(x) for x in result]
         return result

@@ -241,12 +241,6 @@ recommendation_criteria_dict = {
                     "attr_key": "newly_created_restaurants",
                     "type": "ATTR_COMPARE",
                     "operation": "IN"
-                },
-                {
-                    "key": "rating",
-                    "type": "SIMPLE_COMPARE",
-                    "value": 4,
-                    "operation": "LT"
                 }
             ],
             "combination_type": "AND"

@@ -9,6 +9,7 @@ class Cuisine(str, Enum):
     SouthIndian = "SouthIndian"
     NorthIndian = "NorthIndian"
     Chinese = "Chinese"
+    Italian = "Italian"
 
 
 class Restaurant(BaseModel):
